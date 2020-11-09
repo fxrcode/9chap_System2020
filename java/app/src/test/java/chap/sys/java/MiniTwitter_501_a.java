@@ -41,9 +41,10 @@ public class MiniTwitter_501_a {
     /*-
      * https://stackoverflow.com/questions/2148686/non-public-top-level-class-vs-static-nested-class
      * - use static nested class if the class is only used by the outer class, rather create multiple class.
-     * - use push model.
+     * - use pull model, so it's slow since the testcase has O(10k) max followers.
      */
     class MiniTwitter {
+        // ppl that user_id followed.
         private Map<Integer, Set<Integer>> user_to_followers;
         private Map<Integer, LinkedList<Node>> user_to_tweets;
         private static final int LATEST = 10;
