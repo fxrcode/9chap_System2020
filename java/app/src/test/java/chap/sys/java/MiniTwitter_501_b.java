@@ -48,7 +48,7 @@ public class MiniTwitter_501_b {
         private Map<Integer, Set<Integer>> followersByVid;
         private Map<Integer, List<Tweet>> timelinesByUserid;
         private Map<Integer, List<Tweet>> newsfeedsByUserid;
-        private static final int LATEST = 10;
+        // private static final int LATEST = 10;
 
         public MiniTwitter() {
             this.followersByVid = new HashMap<>();

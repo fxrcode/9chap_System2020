@@ -70,7 +70,7 @@ public class MiniTwitter_501_a {
             });
         }
 
-        // TODO: still reference to original tmp, should be assumed for ALL Java
+        // still reference to original tmp, should be assumed for ALL Java
         // container methods!
         public List<Node> getRecent10(List<Node> tmp) {
             int last = 10;
@@ -210,7 +210,6 @@ public class MiniTwitter_501_a {
 
         @Override
         public int compareTo(Node other) {
-            // TODO Auto-generated method stub
             if (this.order < other.order) {
                 return 1;
             } else {
