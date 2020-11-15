@@ -18,17 +18,84 @@ For example, the size of 0~119, 120~239 is 120, but the number of the previous m
 */
 public class ConsistHashing_519_a {
     @Test public void test1() {
-
+        Solution sln = new Solution();
+        for (int i = 1; i <= 6; i++) {
+            System.out.println( sln.consistentHashing(i) );
+        }
+//        System.out.println( sln.consistentHashing(4) );
     }
 
+    /**
+     * learned from lintcode solution
+     */
     class Solution {
+        public static final int SZ = 360;
+        public Solution() {}
         /*
          * @param n: a positive integer
          * @return: n x 3 matrix
          */
         public List<List<Integer>> consistentHashing(int n) {
             // write your code here
-            return null;
+            List<List<Integer>> result = new ArrayList<>();
+            List<Integer> machine = Arrays.asList(0, 359, 1);
+            result.add(machine);
+
+            for (int i = 1; i < n; i++) { // i is for simulation
+                int index = 0;
+                for (int j = 1; j < i; j++) { // real cut in each simulation
+                    if (result.get(j).get(1) - result.get(j).get(0) + 1 >
+                        result.get(index).get(1) - result.get(index).get(0) + 1) {
+                        index = j;
+                    }
+                }
+                int x = result.get(index).get(0);
+                int y = result.get(index).get(1);
+                result.get(index).set(1, (x+y)/2);
+                List<Integer> node = Arrays.asList((x+y)/2+1, y, i+1);
+                result.add(node);
+            }
+            return result;
+        }
+    }
+
+    /**
+     * So this is a basic CONSISTENT HASHING, because it's not like INCONSISTENT HASHING that ALL data need to remove to new nodes.
+     */
+    class Solution_Bad {
+        private static final int SZ = 360;
+        public Solution_Bad() { }
+        /*
+         * @param n: a positive integer
+         * @return: n x 3 matrix
+         */
+        public List<List<Integer>> consistentHashing(int n) {
+            // write your code here
+            if (n == 1) {
+                List<List<Integer>> rt = new ArrayList<>();
+                List<Integer> r = Arrays.asList(0, 359, 1);
+                rt.add(r);
+                return rt;
+            }
+            List<List<Integer>> n_1 = consistentHashing(n-1);
+            int mx_size = 0;
+            int mx_idx = 0;
+            int mx_left = 0;
+            for (int i = 0; i < n_1.size(); i++) {
+                int i_sz = n_1.get(i).get(1) - n_1.get(i).get(0);
+                if (i_sz > mx_size) {
+                    mx_left = n_1.get(i).get(0);
+                    mx_size = i_sz;
+                    mx_idx = i;
+                }
+            }
+            // break this mx into 2 item, and update rest's sublist's 3rd item by +1
+            List<Integer> break_0 = Arrays.asList(mx_left, mx_left + mx_size/2, n_1.get(mx_idx).get(2));
+            List<Integer> break_1 = Arrays.asList(mx_left + mx_size/2 + 1, mx_left + mx_size, n);
+
+            n_1.set(mx_idx, break_0);
+            n_1.add(mx_idx+1, break_1);
+            return n_1;
         }
     }
 }
