@@ -27,6 +27,7 @@ public class LFU_22_b {
          */
         public int get(int key) {
             // write your code here
+            return 0;
         }
     }
 }
