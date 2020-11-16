@@ -17,7 +17,7 @@ You can design any shorten algorithm, the judge only cares about two things:
 The short key's length should equal to 6 (without domain and slash). And the acceptable characters are [a-zA-Z0-9]. For example: abcD9E
 No two long urls mapping to the same short url and no two short urls mapping to the same long url.
  */
-public class TinyURL_22_a {
+public class TinyURL_232_a {
     @Test public void test1() {
         TinyUrl tu = new TinyUrl();
         System.out.println( tu.shortToLong( tu.longToShort("http://www.lintcode.com/faq/?id=10") ) );
