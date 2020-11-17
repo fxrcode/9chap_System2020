@@ -1,8 +1,10 @@
 package chap.sys.java.week04dbconsisthashing;
 
-import java.util.*;
-
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /*-
 A general database method for performing a horizontal shard is to take the id against the total number of database servers n and then to find out which machine it is on. The downside of this approach is that as the data continues to increase, we need to increase the database server. When n is changed to n+1, almost all of the data has to be moved, which is not consistent. In order to reduce the defects caused by this naive's hash method (%n), a new hash algorithm emerges: Consistent Hashing, Consistent Hashing. There are many ways to implement this algorithm. Here we implement a simple Consistent Hashing.
@@ -17,22 +19,25 @@ You can assume n <= 360. At the same time, we agree that when there are multiple
 For example, the size of 0~119, 120~239 is 120, but the number of the previous machine is 1, and the number of the next machine is 2, so we split the range of 0~119.
 */
 public class ConsistHashing_519_a {
-    @Test public void test1() {
+    @Test
+    public void test1() {
         Solution sln = new Solution();
         for (int i = 1; i <= 6; i++) {
-            System.out.println( sln.consistentHashing(i) );
+            System.out.println(sln.consistentHashing(i));
         }
-//        System.out.println( sln.consistentHashing(4) );
+        // System.out.println( sln.consistentHashing(4) );
     }
 
     /**
      * learned from lintcode solution
      */
     class Solution {
-        public static final int SZ = 360;
-        public Solution() {}
+        public Solution() {
+        }
+
         /*
          * @param n: a positive integer
+         * 
          * @return: n x 3 matrix
          */
         public List<List<Integer>> consistentHashing(int n) {
@@ -44,29 +49,32 @@ public class ConsistHashing_519_a {
             for (int i = 1; i < n; i++) { // i is for simulation
                 int index = 0;
                 for (int j = 1; j < i; j++) { // real cut in each simulation
-                    if (result.get(j).get(1) - result.get(j).get(0) + 1 >
-                        result.get(index).get(1) - result.get(index).get(0) + 1) {
+                    if (result.get(j).get(1) - result.get(j).get(0) + 1 > result.get(index).get(1)
+                            - result.get(index).get(0) + 1) {
                         index = j;
                     }
                 }
                 int x = result.get(index).get(0);
                 int y = result.get(index).get(1);
-                result.get(index).set(1, (x+y)/2);
-                List<Integer> node = Arrays.asList((x+y)/2+1, y, i+1);
-                result.add(node);
+                result.get(index).set(1, (x + y) / 2);
+                List<Integer> new_machine = Arrays.asList((x + y) / 2 + 1, y, i + 1);
+                result.add(new_machine);
             }
             return result;
         }
     }
 
     /**
-     * So this is a basic CONSISTENT HASHING, because it's not like INCONSISTENT HASHING that ALL data need to remove to new nodes.
+     * So this is a basic CONSISTENT HASHING, because it's not like INCONSISTENT
+     * HASHING that ALL data need to remove to new nodes.
      */
     class Solution_Bad {
-        private static final int SZ = 360;
-        public Solution_Bad() { }
+        public Solution_Bad() {
+        }
+
         /*
          * @param n: a positive integer
+         * 
          * @return: n x 3 matrix
          */
         public List<List<Integer>> consistentHashing(int n) {
@@ -77,7 +85,7 @@ public class ConsistHashing_519_a {
                 rt.add(r);
                 return rt;
             }
-            List<List<Integer>> n_1 = consistentHashing(n-1);
+            List<List<Integer>> n_1 = consistentHashing(n - 1);
             int mx_size = 0;
             int mx_idx = 0;
             int mx_left = 0;
@@ -90,11 +98,11 @@ public class ConsistHashing_519_a {
                 }
             }
             // break this mx into 2 item, and update rest's sublist's 3rd item by +1
-            List<Integer> break_0 = Arrays.asList(mx_left, mx_left + mx_size/2, n_1.get(mx_idx).get(2));
-            List<Integer> break_1 = Arrays.asList(mx_left + mx_size/2 + 1, mx_left + mx_size, n);
+            List<Integer> break_0 = Arrays.asList(mx_left, mx_left + mx_size / 2, n_1.get(mx_idx).get(2));
+            List<Integer> break_1 = Arrays.asList(mx_left + mx_size / 2 + 1, mx_left + mx_size, n);
 
             n_1.set(mx_idx, break_0);
-            n_1.add(mx_idx+1, break_1);
+            n_1.add(mx_idx + 1, break_1);
             return n_1;
         }
     }
