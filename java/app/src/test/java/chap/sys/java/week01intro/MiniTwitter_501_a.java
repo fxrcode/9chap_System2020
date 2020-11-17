@@ -1,4 +1,4 @@
-package chap.sys.java;
+package chap.sys.java.week01intro;
 
 import org.junit.Test;
 import java.util.*;

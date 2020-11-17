@@ -1,4 +1,4 @@
-package chap.sys.java;
+package chap.sys.java.week04dbconsisthashing;
 
 import java.util.*;
 
@@ -28,6 +28,7 @@ public class ConsistHashing_519_a {
          */
         public List<List<Integer>> consistentHashing(int n) {
             // write your code here
+            return null;
         }
     }
 }

@@ -1,4 +1,4 @@
-package chap.sys.java;
+package chap.sys.java.week03apishorturl;
 
 import java.util.HashMap;
 import java.util.Map;
