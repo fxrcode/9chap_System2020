@@ -16,21 +16,24 @@ hashcode("abcd") = (ascii(a) * 333 + ascii(b) * 332 + ascii(c) *33 + ascii(d)) %
 here HASH_SIZE is the capacity of the hash table (you can assume a hash table is like an array with index 0 ~ HASH_SIZE-1).
 
 Given a string as a key and the size of hash table, return the hash value of this key.
+- (a+b)%c = ((a%c) + (b%c)) % c;
+- (ab)%c = ((a%c)(b%c)) % c;
 */
 public class HashFunction_128_a {
     @Test public void test1() {
         Solution_2 sol = new Solution_2();
         System.out.println( sol.hashCode("abcd".toCharArray(), 1000) );
         System.out.println( sol.hashCode("a".toCharArray(), 1000) );
+        System.out.println( sol.hashCode("Wrong answer or accepted?".toCharArray(), 1000000007) );
     }
 
     class Solution_2 {
         public int hashCode(char[] key, int HASH_SIZE) {
-            int ans = 0;
+            long ans = 0;
             for (int i = 0; i < key.length; i++) {
-                ans = (ans * 33 + key[i]) % HASH_SIZE;
+                ans = (ans * 33 + (int)(key[i])) % HASH_SIZE;
             }
-            return ans;
+            return (int)ans;
         }
     }
 
