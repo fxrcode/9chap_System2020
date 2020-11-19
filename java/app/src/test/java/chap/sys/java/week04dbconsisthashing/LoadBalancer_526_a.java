@@ -13,7 +13,7 @@ import java.util.*;
  * equal probability => pick(). At beginning, the cluster is empty. When pick()
  * is called you need to randomly return a server_id in the cluster.
  */
-public class Load_Balancer_526_a {
+public class LoadBalancer_526_a {
     @Test
     public void test() {
         LoadBalancer s = new LoadBalancer();

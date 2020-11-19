@@ -3,7 +3,7 @@ package chap.sys.java.week04dbconsisthashing;
 import org.junit.Test;
 
 import java.util.*;
-public class Load_Balancer_526_b {
+public class LoadBalancer_526_b {
     @Test
     public void test2() {
         LoadBalancer s = new LoadBalancer();
