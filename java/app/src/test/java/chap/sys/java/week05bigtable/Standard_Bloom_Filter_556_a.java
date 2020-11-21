@@ -3,6 +3,13 @@ package chap.sys.java.week05bigtable;
 import org.junit.Test;
 import java.util.*;
 
+/*-
+Implement a standard bloom filter. Support the following method:
+
+StandardBloomFilter(k) The constructor and you need to create k hash functions.
+add(string) Add a string into bloom filter.
+contains(string) Check a string whether exists in bloom filter.
+*/
 public class Standard_Bloom_Filter_556_a {
     @Test
     public void test() {
