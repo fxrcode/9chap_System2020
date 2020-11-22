@@ -32,11 +32,19 @@ public class GFS_Client_566_a {
         >> "aaaaabbbbb" */
     }
 
+    /**
+     * 您的提交打败了 100.00% 的提交!
+     * Gatech IoS client-server to upload big pic.
+     */
     public class GFSClient extends BaseGFSClient {
+        private int chunksz = 0;
+        private Map<String, Integer> chunknumsByFilename;
         /*
          * @param chunkSize: An integer
          */public GFSClient(int chunkSize) {
             // do intialization if necessary
+            this.chunksz = chunkSize;
+            this.chunknumsByFilename = new HashMap<>();
         }
 
         /*
@@ -46,17 +54,39 @@ public class GFS_Client_566_a {
          */
         public String read(String filename) {
             // write your code here
+            if ( !chunknumsByFilename.containsKey(filename) ) {
+                return null;
+            }
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < chunknumsByFilename.get(filename); i++) {
+                String chunk;
+                if ((chunk = readChunk(filename, i)) != null ) {
+                    sb.append(chunk);
+                }
+            }
+            return sb.toString();
         }
 
         /*
          * @param filename: a file name
-         * 
+         *
          * @param content: a string
-         * 
+         *
          * @return: nothing
          */
         public void write(String filename, String content) {
             // write your code here
+            int length = content.length();
+            int pos = 0;
+            int idx = 0;
+            int end = 0;
+            do {
+                end = Math.min(pos+chunksz, length);
+                writeChunk(filename, idx, content.substring(pos, end));
+                pos = end;
+                idx++;
+            } while (pos < length);
+            chunknumsByFilename.put(filename, idx);
         }
     }
 
@@ -69,6 +99,7 @@ public class GFS_Client_566_a {
 
         public String readChunk(String filename, int chunkIndex) {
             // Read a chunk from GFS
+            return null;
         }
 
         public void writeChunk(String filename, int chunkIndex, String content) {
