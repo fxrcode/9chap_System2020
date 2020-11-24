@@ -20,7 +20,7 @@ A bus can park in five large spots that are consecutive and within same row. it 
 
 您的提交打败了 8.80% 的提交!
 */
-public class ParkingLog_498 {
+public class ParkingLot_498 {
     @Test
     public void test() {
         ParkingLot parkingLot = new ParkingLot(1, 1, 11);
