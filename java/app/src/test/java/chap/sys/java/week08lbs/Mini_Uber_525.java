@@ -96,6 +96,10 @@ public class Mini_Uber_525 {
         }
     }
 
+    /*****************************************************************
+     * All given class defined and ready to use
+     */
+
     // Definition of Trip:
     public class Trip {
         public int id; // trip's id, primary key
@@ -110,7 +114,6 @@ public class Mini_Uber_525 {
             this.lng = lng;
         }
     }
-
 
     // Definition of Helper
     static class Helper {
