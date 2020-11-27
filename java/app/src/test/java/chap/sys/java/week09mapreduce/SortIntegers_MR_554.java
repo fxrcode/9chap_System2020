@@ -21,8 +21,8 @@ public class SortIntegers_MR_554 {
     }
 
     /*****************************************************************
-     * All given class defined and ready to use
-     */
+     *          All given class defined and ready to use             *
+     *****************************************************************/
 
     // Definition of OutputCollector:
     class OutputCollector<K, V> {
