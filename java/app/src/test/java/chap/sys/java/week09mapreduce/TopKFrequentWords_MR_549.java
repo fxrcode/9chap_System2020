@@ -32,7 +32,10 @@ public class TopKFrequentWords_MR_549 {
         public static class Reduce {
             private int k = 0;
             private PriorityQueue<Pair> q;
-            private Comparator<Pair> cmp = (a,b) -> {
+
+            // note: it's same lambda to create comparator, but it's better to write it to a
+            // member, so we can reuse it in other places
+            private Comparator<Pair> cmp = (a, b) -> {
                 if (a.cnt != b.cnt) {
                     return a.cnt - b.cnt;
                 } else {
@@ -68,10 +71,11 @@ public class TopKFrequentWords_MR_549 {
                 // Output the top k pairs <word, times> into output buffer.
                 // Ps. output.collect(String key, Integer value);
                 List<Pair> tmp = new ArrayList<>();
-                // tmp.addAll(q);   // Careful, this doesn't preserve queue's order when using addAll
+                // Careful, this doesn't preserve queue's order when using arr.addAll(queue);
+                // tmp.addAll(q);
                 while (!q.isEmpty())
                     tmp.add(q.poll());
-                for (int i = tmp.size()-1; i >= 0; i--) {
+                for (int i = tmp.size() - 1; i >= 0; i--) {
                     Pair cur = tmp.get(i);
                     output.collect(cur.word, cur.cnt);
                 }
