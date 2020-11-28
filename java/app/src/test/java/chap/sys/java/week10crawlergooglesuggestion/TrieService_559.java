@@ -2,7 +2,23 @@ package chap.sys.java.week10crawlergooglesuggestion;
 
 import java.util.*;
 
-// Build tries from a list of <word, freq> pairs. Save top 10 for each node.
+/*-
+* Description
+Build tries from a list of <word, freq> pairs. Save top 10 for each node.
+Input1:
+ <"abc", 2>
+ <"ac", 4>
+ <"ab", 9>
+Output1:<a[9,4,2]<b[9,2]<c[2]<>>c[4]<>>>
+Explain:
+			Root
+             / 
+           a(9,4,2)
+          /    \
+        b(9,2) c(4)
+       /
+     c(2)
+*/
 public class TrieService_559 {
     public class TrieService {
 
