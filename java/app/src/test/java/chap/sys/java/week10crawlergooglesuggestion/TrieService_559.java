@@ -18,10 +18,58 @@ public class TrieService_559 {
             return root;
         }
 
-        // @param word a string
-        // @param frequency an integer
+        /**
+         * No much speed up.
+         * @param word
+         * @param frequency
+         */
         public void insert(String word, int frequency) {
             // Write your cod here
+            TrieNode cur = getRoot();
+            for (int i = 0; i < word.length(); i++) {
+                char c = word.charAt(i);
+                if (cur.children.get(c) == null) {
+                    cur.children.put(c, new TrieNode());
+                }
+                cur = cur.children.get(c);
+                List<Integer> sortedList = cur.top10;
+                sortedList.add(frequency);
+                Collections.sort(sortedList, Collections.reverseOrder());
+                if (sortedList.size() > 10) {
+                    sortedList.remove(10);
+                }
+                cur.top10 = sortedList;
+            }
+        }
+
+        /**
+         * My 1st implement, a bit slow.
+         * @param word
+         * @param frequency
+         */
+        public void insert_a(String word, int frequency) {
+            // Write your cod here
+            TrieNode cur = getRoot();
+            for (int i = 0; i < word.length(); i++) {
+                char c = word.charAt(i);
+                if (cur.children.get(c) == null) {
+                    cur.children.put(c, new TrieNode());
+                }
+                cur = cur.children.get(c);
+                addFrequency(cur, frequency);
+            }
+        }
+
+        // 您的提交打败了 13.80% 的提交!
+        private void addFrequency(TrieNode cur, int frequency) {
+            List<Integer> top10 = cur.top10;
+            top10.add(frequency);
+            Collections.sort(top10, (a,b) -> {
+                return b-a;
+            });
+            if (top10.size() > 10) {
+                cur.top10 = top10.subList(0, 10);
+            }
         }
     }
 
